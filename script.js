@@ -41,7 +41,7 @@ function convertCurrency(amount, price, symbol) {
   try {
     const converted = (amount * price).toFixed(2).replace(".", ",");
     footer.classList.add("show-result");
-    description.innerHTML = `${symbol} 1 = R$ ${cotation.USD}`;
+    description.innerHTML = `${symbol} 1 = R$ ${price.toFixed(2)}`;
     result.innerHTML = `${converted} Reais`;
   } catch (error) {
     alert("Não foi possivel realizar a conversao");
