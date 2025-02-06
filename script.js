@@ -2,7 +2,7 @@
 const cotation = {
   USD: 5.5,
   EUR: 6.5,
-  GPB: 7.5,
+  GBP: 7.5,
 };
 
 // DOM elements
@@ -10,6 +10,8 @@ const form = document.querySelector("form");
 const amount = document.querySelector("#amount");
 const currency = document.querySelector("#currency");
 const footer = document.querySelector("footer");
+const description = document.querySelector("#description");
+const result = document.querySelector("#result");
 
 // manipulating the input value for recive just numbers
 amount.addEventListener("input", () => {
@@ -28,11 +30,20 @@ form.addEventListener("submit", (e) => {
     case "EUR":
       convertCurrency(amount.value, cotation.EUR, "€");
       break;
-    case "BRL":
-      convertCurrency(amount.value, cotation.GPB, "£");
+    case "GBP":
+      convertCurrency(amount.value, cotation.GBP, "£");
       break;
   }
 });
 
 // function to convert currency
-function convertCurrency(amount, price, symbol) {}
+function convertCurrency(amount, price, symbol) {
+  try {
+    const converted = (amount * price).toFixed(2).replace(".", ",");
+    footer.classList.add("show-result");
+    description.innerHTML = `${symbol} 1 = R$ ${cotation.USD}`;
+    result.innerHTML = `${converted} Reais`;
+  } catch (error) {
+    alert("Não foi possivel realizar a conversao");
+  }
+}
